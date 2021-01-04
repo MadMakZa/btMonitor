@@ -1,6 +1,7 @@
 package com.example.btmonitor;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothAdapter;
@@ -44,11 +45,30 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.id_bt_button){
             //если не включен
             if(!btAdapter.isEnabled()){
+                //включить
+                enableBt();
+            }else {
+                //выключить
+                btAdapter.disable();
+                menuItem.setIcon(R.drawable.ic_bt_enable);
 
             }
 
         }
         return super.onOptionsItemSelected(item);
+    }
+    //проверка
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ENABLE_REQUEST){
+
+            if(resultCode == RESULT_OK){
+
+                setBtIcon();
+            }
+        }
     }
 
     //метод смены иконки блютуза
