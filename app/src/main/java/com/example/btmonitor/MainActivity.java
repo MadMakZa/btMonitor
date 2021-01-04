@@ -31,6 +31,17 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         //найти кнопочку в меню и присвоить переменной
         menuItem = menu.findItem(R.id.id_bt_button);
+        setBtIcon();
         return super.onCreateOptionsMenu(menu);
+    }
+
+    //метод смены иконки блютуза
+    private void setBtIcon(){
+        //если включен
+        if(btAdapter.isEnabled()){
+            menuItem.setIcon(R.drawable.ic_bt_disable); //показать кнопку для выкл
+        }else{
+            menuItem.setIcon(R.drawable.ic_bt_enable); //показать кнопку для вкл
+        }
     }
 }
