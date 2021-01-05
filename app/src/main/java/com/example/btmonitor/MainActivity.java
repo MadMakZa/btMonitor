@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+//        init();
     }
 
     private void init(){
@@ -35,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         //найти кнопочку в меню и присвоить переменной
         menuItem = menu.findItem(R.id.id_bt_button);
-        setBtIcon();
+//        setBtIcon();
         return super.onCreateOptionsMenu(menu);
     }
+
     //слушатель нажатия кнопок в менюшке
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -53,8 +54,13 @@ public class MainActivity extends AppCompatActivity {
                 menuItem.setIcon(R.drawable.ic_bt_enable);
 
             }
-
+        //если нажато на кнопочку меню
+        } else if(item.getItemId() == R.id.id_menu){
+            //запуск нового активити
+            Intent intent = new Intent(MainActivity.this, BtListActivity.class);
+            startActivity(intent);
         }
+
         return super.onOptionsItemSelected(item);
     }
     //проверка

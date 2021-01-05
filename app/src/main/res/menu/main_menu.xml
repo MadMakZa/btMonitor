@@ -5,5 +5,12 @@
     <item android:title="BtEnable"
         android:icon="@drawable/ic_bt_enable"
         android:id="@+id/id_bt_button"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"/>
+
+    <item android:title="BtList"
+        android:icon="@drawable/ic_menu"
+        android:id="@+id/id_menu"
+        android:orderInCategory="200"
         app:showAsAction="ifRoom"/>
 </menu>
