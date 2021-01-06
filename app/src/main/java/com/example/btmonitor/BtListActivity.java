@@ -28,6 +28,7 @@ public class BtListActivity extends AppCompatActivity {
 
     private void init(){
         ActionBar ab = getSupportActionBar();
+        if (ab == null) return;
         ab.setDisplayHomeAsUpEnabled(true);
     }
 }

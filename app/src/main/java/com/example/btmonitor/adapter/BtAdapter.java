@@ -47,10 +47,10 @@ public class BtAdapter extends ArrayAdapter<ListItem> {
         viewHolder.tvBtName.setText("text gadjets");
         viewHolder.chBtSelected.setChecked(true);
 
-        return super.getView(position, convertView, parent);
+        return convertView;
     }
     //будет хранить инициилизированные (найденные устройства)
-    class ViewHolder{
+    static class ViewHolder{
 
         TextView tvBtName;
         CheckBox chBtSelected;
