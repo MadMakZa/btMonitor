@@ -20,9 +20,13 @@ import java.util.List;
  */
 public class BtAdapter extends ArrayAdapter<ListItem> {
 
+    private List<ListItem> mainList;
+
     //constructor
     public BtAdapter(@NonNull Context context, int resource, List<ListItem> btList) {
         super(context, resource, btList);
+
+        mainList = btList;
     }
 
     //заполнение списка устройствами
@@ -44,7 +48,7 @@ public class BtAdapter extends ArrayAdapter<ListItem> {
 
         }
 
-        viewHolder.tvBtName.setText("text gadjets");
+        viewHolder.tvBtName.setText(mainList.get(position).getBtName());
         viewHolder.chBtSelected.setChecked(true);
 
         return convertView;

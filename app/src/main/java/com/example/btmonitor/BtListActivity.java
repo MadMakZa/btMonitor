@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -13,11 +15,14 @@ import com.example.btmonitor.adapter.ListItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class BtListActivity extends AppCompatActivity {
 
     private ListView listView;
     private BtAdapter adapter;
+    private BluetoothAdapter btAdapter;
+    private List<ListItem> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +47,26 @@ public class BtListActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         listView = findViewById(R.id.listView);
+        btAdapter = BluetoothAdapter.getDefaultAdapter();
+        list = new ArrayList<>();
 
-        //временный список
-        List<ListItem> list = new ArrayList<>();
-        ListItem item = new ListItem();
-        item.setBtName("BT 123456");
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
         adapter = new BtAdapter(this, R.layout.bt_list_item, list);
         listView.setAdapter(adapter);
+    }
+
+    //найденные девайсы и передача его в список
+    private void getPairedDevices(){
+        Set<BluetoothDevice> pairedDevices = btAdapter.getBondedDevices();
+
+        if (pairedDevices.size() > 0){
+            list.clear(); //очистить
+            for (BluetoothDevice device : pairedDevices){
+                ListItem item = new ListItem();
+                item.setBtName(device.getName());
+                item.setBtMac(device.getAddress()); //mac address
+                list.add(item);
+            }
+            adapter.notifyDataSetChanged(); //сказать адаптеру, что данные надо обновить
+        }
     }
 }
